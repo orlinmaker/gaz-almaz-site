@@ -24,6 +24,7 @@ export function Header() {
     { href: "#hero", label: "Главная" },
     { href: "#products", label: "Каталог" },
     { href: "#accessories", label: "Аксессуары" },
+    { href: "/poppers", label: "Попперсы", isExternal: true },
     { href: "#deals", label: "Акции" },
     { href: "#about", label: "О компании" },
     { href: "#safety", label: "Как это работает" },
@@ -31,7 +32,11 @@ export function Header() {
     { href: "#contact", label: "Контакты" },
   ]
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string, isExternal?: boolean) => {
+    if (isExternal) {
+      return
+    }
+
     e.preventDefault()
     const targetId = href.replace("#", "")
     const targetElement = document.getElementById(targetId)
@@ -71,7 +76,7 @@ export function Header() {
               <a
                 key={item.href}
                 href={item.href}
-                onClick={(e) => handleNavClick(e, item.href)}
+                onClick={(e) => handleNavClick(e, item.href, item.isExternal)}
                 className="text-base font-semibold text-foreground/80 hover:text-primary transition-colors cursor-pointer font-[family-name:var(--font-heading)]"
               >
                 {item.label}
@@ -121,7 +126,7 @@ export function Header() {
               <a
                 key={item.href}
                 href={item.href}
-                onClick={(e) => handleNavClick(e, item.href)}
+                onClick={(e) => handleNavClick(e, item.href, item.isExternal)}
                 className="text-base font-semibold text-foreground/80 hover:text-primary transition-colors cursor-pointer font-[family-name:var(--font-heading)]"
               >
                 {item.label}

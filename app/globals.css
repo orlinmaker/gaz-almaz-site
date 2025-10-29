@@ -220,6 +220,7 @@
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
   background-size: 200% 100%;
   animation: shine-effect 3s infinite;
+  pointer-events: none;
 }
 
 @keyframes sparkle {
@@ -342,11 +343,43 @@
 }
 
 @keyframes ga-breathe {
-  0%, 100% { transform: scale(1);   opacity: .9; }
-  50%      { transform: scale(1.06); opacity: 1; }
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.06);
+    opacity: 1;
+  }
 }
-
 
 .animate-ga-breathe {
   animation: ga-breathe 3.5s ease-in-out infinite;
+}
+
+/* Added image glow effect for detail pages */
+.image-glow-container {
+  position: relative;
+}
+
+.image-glow-container::before {
+  content: "";
+  position: absolute;
+  inset: -20px;
+  background: radial-gradient(
+    circle at center,
+    rgba(0, 217, 255, 0.3) 0%,
+    rgba(127, 233, 255, 0.2) 30%,
+    transparent 70%
+  );
+  filter: blur(50px);
+  opacity: 0.6;
+  pointer-events: none;
+  z-index: -1;
+  transition: opacity 0.5s ease;
+}
+
+.image-glow-container:hover::before {
+  opacity: 0.8;
 }

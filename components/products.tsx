@@ -84,7 +84,7 @@ export function Products() {
             }
           })
         },
-        { threshold: 0.1 }
+        { threshold: 0.1 },
       )
       observer.observe(card)
       return observer
@@ -115,18 +115,20 @@ export function Products() {
             return (
               <div
                 key={product.slug}
-                ref={(el) => { cardRefs.current[index] = el }}
+                ref={(el) => {
+                  cardRefs.current[index] = el
+                }}
                 className={`transition-all duration-700 ${
                   visibleCards[index] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
                 }`}
               >
                 <Card
-                  className={`glass-effect overflow-hidden group hover:scale-105 transition-all duration-300 shine-overlay ${
+                  className={`relative glass-effect overflow-hidden group hover:scale-105 transition-all duration-300 shine-overlay ${
                     isFeatured ? "border-primary border-2" : "border-primary/20"
                   } hover:border-primary hover:shadow-[0_0_30px_rgba(0,217,255,0.5)]`}
                 >
                   {isFeatured && (
-                    <div className="absolute top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary to-secondary text-primary-foreground text-xs md:text-sm font-bold px-4 py-1 rounded-full shadow-lg z-10">
+                    <div className="absolute top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary to-secondary text-primary-foreground text-xs md:text-sm font-bold px-4 py-1 rounded-full shadow-lg z-10 pointer-events-none">
                       ПОПУЛЯРНЫЙ ВЫБОР
                     </div>
                   )}
@@ -135,14 +137,14 @@ export function Products() {
                     {/* КАРТИНКА ТОВАРА */}
                     <div className="mb-6 relative overflow-hidden rounded-xl h-48">
                       <Image
-                        src={product.image}
+                        src={product.image || "/placeholder.svg"}
                         alt={product.alt}
                         fill
                         className="object-contain transition-transform duration-500 group-hover:scale-110"
                         loading="lazy"
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent pointer-events-none" />
                     </div>
 
                     <div className="flex items-start justify-between mb-4">
@@ -166,7 +168,7 @@ export function Products() {
                       ))}
                     </ul>
 
-                    <div className="flex flex-col sm:flex-row gap-3">
+                    <div className="flex flex-col sm:flex-row gap-3 relative z-20">
                       {/* КНОПКА: ведёт на страницу товара */}
                       <Button
                         variant="outline"
@@ -189,7 +191,7 @@ export function Products() {
                       >
                         <a
                           href={`https://wa.me/79990000000?text=${encodeURIComponent(
-                            `Здравствуйте! Хочу заказать: ${product.name}`
+                            `Здравствуйте! Хочу заказать: ${product.name}`,
                           )}`}
                           target="_blank"
                           rel="noopener noreferrer"

@@ -1,5 +1,6 @@
 import { Hero } from "@/components/hero"
 import { Products } from "@/components/products"
+import { Poppers } from "@/components/poppers"
 import { Accessories } from "@/components/accessories"
 import { Deals } from "@/components/deals"
 import { About } from "@/components/about"
@@ -15,6 +16,7 @@ export default function Home() {
       <Header />
       <Hero />
       <Products />
+      <Poppers />
       <Accessories />
       <Deals />
       <About />
