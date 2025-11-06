@@ -137,7 +137,7 @@ export function Header() {
             ))}
             <div className="flex gap-3 pt-2">
               <a
-                href="https://t.me/GAZALMAZ"
+                href="https://t.me/almazgaz_bot"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex-1 flex items-center justify-center gap-2 p-3 rounded-lg bg-[#00d9ff]/10 hover:bg-[#00d9ff]/20 text-[#00d9ff] transition-all"
@@ -157,7 +157,7 @@ export function Header() {
                 WhatsApp
               </a>
             </div>
-            <a href="tel:+79990000000" className="w-full">
+            <a href="tel:+74958683399" className="w-full">
               <Button className="w-full bg-gradient-to-r from-primary to-secondary text-primary-foreground">
                 <Phone className="w-4 h-4 mr-2" />
                 Позвонить
