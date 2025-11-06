@@ -8,14 +8,14 @@ export function Contact() {
     {
       icon: Phone,
       title: "Телефон",
-      value: "+7 (999) 000-00-00",
-      link: "tel:+79990000000",
+      value: "+7 (495) 868-33-99",
+      link: "tel:+74958683399",
     },
     {
       icon: Mail,
       title: "Email",
-      value: "info@gazalmaz.ru",
-      link: "mailto:info@gazalmaz.ru",
+      value: "gaz.almaz1@yandex.ru",
+      link: "mailto:gaz.almaz1@yandex.ru",
     },
     {
       icon: MapPin,
