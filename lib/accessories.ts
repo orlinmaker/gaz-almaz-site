@@ -12,7 +12,7 @@ export const accessories: Accessory[] = [
     id: "balloons",
     name: "Шарики",
     description: "Шарики торговой марки GEMAR",
-    priceLabel: "5 шт. - 700 ₽, 25 шт. - 1 500 ₽",
+    priceLabel: "5 шт. - 200 ₽, 25 шт. - 700 ₽",
     image: "/accessories/balloons.png",
     features: ["Латекс", "Разные цвета", "Размер (Д × Ш × В) — 30 см х 20 см х 2 см"]
   },
