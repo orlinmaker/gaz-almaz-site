@@ -18,6 +18,11 @@ type Product = {
   image: string
   alt: string
   featured?: boolean
+
+  // NEW: явные поля для плашек (volume/weight/pieces)
+  volume?: string
+  weight?: string
+  pieces?: string
 }
 
 export function Products() {
@@ -30,41 +35,54 @@ export function Products() {
       name: "Алмаз Refill Station. Баллон 10 литров веселящего газа",
       icon: Crown,
       description: "",
-      features: ["90-100 шаров"],
+      features: [],
       price: "от 8 500 ₽",
       image: "/products/refill.png",
       alt: "Алмаз Refill Station — фирменный баллон",
+      // NEW: значения плашек
+      volume: "10 л",
+      weight: "6,2 кг",
+      pieces: "100 шаров",
     },
     {
       slug: "party",
       name: "Алмаз Party Kit. Баллон 5 литров веселящего газа",
       icon: Zap,
       description: "",
-      features: ["45-50 шаров"],
+      features: [],
       price: "от 6 000 ₽",
       image: "/products/party.png",
       alt: "Алмаз Party Kit — фирменный баллон",
-    },
-    {
-      slug: "premium",
-      name: "Алмаз Premium. Баллон 3,5 литра веселящего газа",
-      icon: Star,
-      description: "",
-      features: ["10-12 шаров"],
-      price: "от 3 000 ₽",
-      featured: true,
-      image: "/products/premium.png",
-      alt: "Алмаз Premium — фирменный баллон",
+      volume: "5 л",
+      weight: "2,8 кг",
+      pieces: "50 шаров",
     },
     {
       slug: "classic",
       name: "Алмаз Classic. Баллон 2 литра веселящего газа",
       icon: Sparkles,
       description: "",
-      features: ["25-30 шаров"],
+      features: [],
+      featured: true,
       price: "от 4 500 ₽",
       image: "/products/classic.png",
       alt: "Алмаз Classic — фирменный баллон",
+      volume: "2 л",
+      weight: "1,2 кг",
+      pieces: "30 шаров",
+    },
+    {
+      slug: "premium",
+      name: "Алмаз Premium. Баллон 3,5 литра веселящего газа",
+      icon: Star,
+      description: "",
+      features: [],
+      price: "от 3 000 ₽",
+      image: "/products/premium.png",
+      alt: "Алмаз Premium — фирменный баллон",
+      volume: "3,5 л",
+      weight: "650 г",
+      pieces: "12 шаров",
     },
   ]
 
@@ -145,6 +163,29 @@ export function Products() {
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent pointer-events-none" />
+
+                      {/*
+                        NEW: BADGES IN CARD — compact centered badges for product cards
+                      */}
+                      <div className="absolute top-3 right-3 flex flex-col items-end gap-2 z-10">
+                        {product.volume ? (
+                          <div className="inline-flex justify-center items-center h-8 min-w-[2rem] px-2 rounded-full bg-gray-900/70 ring-1 ring-white/10 text-white text-xs font-medium shadow-sm">
+                            <span className="leading-none">{product.volume}</span>
+                          </div>
+                        ) : null}
+                        {product.weight ? (
+                          <div className="inline-flex justify-center items-center h-8 min-w-[2rem] px-2 rounded-full bg-gray-900/70 ring-1 ring-white/10 text-white text-xs font-medium shadow-sm">
+                            <span className="leading-none">{product.weight}</span>
+                          </div>
+                        ) : null}
+                        {product.pieces ? (
+                          <div className="inline-flex justify-center items-center h-8 min-w-[2rem] px-2 rounded-full bg-gray-900/70 ring-1 ring-white/10 text-white text-xs font-medium shadow-sm">
+                            <span className="leading-none">{product.pieces}</span>
+                          </div>
+                        ) : null}
+                      </div>
+                      {/* END NEW */}
+
                     </div>
 
                     <div className="flex items-start justify-between mb-4">
@@ -180,7 +221,7 @@ export function Products() {
                         </Link>
                       </Button>
 
-                      {/* КНОПКА ЗАКАЗА В WHATSAPP */}
+                      {/* КНОПКА ЗАКАЗА ВЫЗОВ */}
                       <Button
                         className={`flex-1 ${
                           isFeatured
@@ -190,9 +231,7 @@ export function Products() {
                         asChild
                       >
                         <a
-                          href={`https://wa.me/79990000000?text=${encodeURIComponent(
-                            `Здравствуйте! Хочу заказать: ${product.name}`,
-                          )}`}
+                          href={`tel:+74958683399`}
                           target="_blank"
                           rel="noopener noreferrer"
                         >

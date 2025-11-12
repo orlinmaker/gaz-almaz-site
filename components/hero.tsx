@@ -68,7 +68,7 @@ export function Hero() {
                 <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Button>
             </a>
-            <a href="#contact">
+            <a href="tel:+74958683399">
               <Button
                 size="lg"
                 variant="outline"
