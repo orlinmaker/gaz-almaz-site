@@ -18,9 +18,10 @@ type DetailPageProps = {
   // старое поле оставляем, чтобы не сломать другие страницы
   price?: number
   priceLabel?: string
-  // новые поля
+  // новые поля цен
   priceBuy?: number
   priceExchange?: number
+  // изображение
   image: string
   features?: string[]
   breadcrumbs: Breadcrumb[]
@@ -28,6 +29,11 @@ type DetailPageProps = {
   backLabel: string
   orderType: string
   itemId: string
+
+  // NEW: отдельные поля для плашек (не зависят от features)
+  volumeLabel?: string   // пример "10 л"
+  weightLabel?: string   // пример "6,2 кг"
+  piecesLabel?: string   // пример "160 шаров"
 }
 
 export function DetailPage({
@@ -44,6 +50,10 @@ export function DetailPage({
   backLabel,
   orderType,
   itemId,
+  // NEW: деструктурируем новые поля
+  volumeLabel,
+  weightLabel,
+  piecesLabel,
 }: DetailPageProps) {
   // это на случай, если придёт только старое поле
   const fallbackPrice = priceLabel || (price ? `${price.toLocaleString("ru-RU")} ₽` : "")
@@ -84,6 +94,33 @@ export function DetailPage({
                 priority
               />
             </div>
+
+            {/*
+              NEW: BADGES — compact centered badges like on target screenshot
+            */}
+            <div className="absolute top-6 right-4 flex flex-col items-center gap-3 z-20">
+              {volumeLabel ? (
+                <div className="inline-flex justify-center items-center h-8 min-w-[2rem] px-2 rounded-full bg-gray-900/70 ring-1 ring-white/10 text-white text-sm font-medium shadow-sm">
+                  <span className="leading-none">{volumeLabel}</span>
+                </div>
+              ) : null}
+
+              {weightLabel ? (
+                <div className="inline-flex justify-center items-center h-8 min-w-[2rem] px-2 rounded-full bg-gray-900/70 ring-1 ring-white/10 text-white text-sm font-medium shadow-sm">
+                  <span className="leading-none">{weightLabel}</span>
+                </div>
+              ) : null}
+
+              {piecesLabel ? (
+                <div className="inline-flex justify-center items-center h-8 min-w-[2rem] px-2 rounded-full bg-gray-900/70 ring-1 ring-white/10 text-white text-sm font-medium shadow-sm">
+                  <span className="leading-none">{piecesLabel}</span>
+                </div>
+              ) : null}
+            </div>
+            {/* END NEW */}
+
+
+
           </div>
 
           {/* Details Section */}

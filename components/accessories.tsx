@@ -93,9 +93,7 @@ export function Accessories() {
                       asChild
                     >
                       <a
-                        href={`https://wa.me/79990000000?text=${encodeURIComponent(
-                          `Здравствуйте! Хочу аксессуар: ${accessory.name}`,
-                        )}`}
+                        href={'tel:+74958683399'}
                         target="_blank"
                         rel="noopener noreferrer"
                       >

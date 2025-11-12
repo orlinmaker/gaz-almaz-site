@@ -68,13 +68,13 @@ export function Contact() {
               <div>
                 <h4 className="font-bold mb-2">Как быстро доставка?</h4>
                 <p className="text-sm text-muted-foreground text-pretty leading-relaxed">
-                  Мы доставляем заказы в течение 24 часов по Москве и области.
+                  Мы доставляем заказы от 30 минут по Москве и области.
                 </p>
               </div>
               <div>
                 <h4 className="font-bold mb-2">Есть ли минимальный заказ?</h4>
                 <p className="text-sm text-muted-foreground text-pretty leading-relaxed">
-                  Минимальный заказ — 1 баллон. Для оптовых заказов действуют специальные цены.
+                  Минимальный заказ — 1 баллон. Для оптовых заказов от 5 баллонов действуют специальные цены.
                 </p>
               </div>
               <div>
