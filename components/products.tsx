@@ -3,7 +3,6 @@
 import type React from "react"
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Sparkles, Star, Zap, Crown } from "lucide-react"
 import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
 import Link from "next/link"
@@ -11,18 +10,26 @@ import Link from "next/link"
 type Product = {
   slug: "classic" | "premium" | "party" | "refill"
   name: string
-  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>
-  description: string
-  features: string[]
+  description?: string
+  features?: string[]
+  // старое поле оставляем на совместимость
   price: string
+  // NEW: явные числовые поля для продаж/обмена
+  sellPrice?: number
+  exchangePrice?: number
+
   image: string
   alt: string
   featured?: boolean
 
-  // NEW: явные поля для плашек (volume/weight/pieces)
   volume?: string
   weight?: string
   pieces?: string
+}
+
+function capitalizeFirst(s: string) {
+  if (!s) return s
+  return s.charAt(0).toUpperCase() + s.slice(1).toLowerCase()
 }
 
 export function Products() {
@@ -32,54 +39,57 @@ export function Products() {
   const products: Product[] = [
     {
       slug: "refill",
-      name: "Алмаз Refill Station. Баллон 10 литров веселящего газа",
-      icon: Crown,
+      name: "Баллон 10 литров веселящего газа",
       description: "",
       features: [],
+      featured: true,
       price: "от 8 500 ₽",
+      sellPrice: 14000,      // NEW
+      exchangePrice: 8500,   // NEW
       image: "/products/refill.png",
-      alt: "Алмаз Refill Station — фирменный баллон",
-      // NEW: значения плашек
+      alt: "Баллон 10 л",
       volume: "10 л",
       weight: "6,2 кг",
       pieces: "100 шаров",
     },
     {
       slug: "party",
-      name: "Алмаз Party Kit. Баллон 5 литров веселящего газа",
-      icon: Zap,
+      name: "Баллон 5 литров веселящего газа",
       description: "",
       features: [],
       price: "от 6 000 ₽",
+      sellPrice: 8000,
+      exchangePrice: 6000,
       image: "/products/party.png",
-      alt: "Алмаз Party Kit — фирменный баллон",
+      alt: "Баллон 5 л",
       volume: "5 л",
       weight: "2,8 кг",
       pieces: "50 шаров",
     },
     {
       slug: "classic",
-      name: "Алмаз Classic. Баллон 2 литра веселящего газа",
-      icon: Sparkles,
+      name: "Баллон 2 литра веселящего газа",
       description: "",
       features: [],
-      featured: true,
       price: "от 4 500 ₽",
+      sellPrice: 5500,
+      exchangePrice: 4500,
       image: "/products/classic.png",
-      alt: "Алмаз Classic — фирменный баллон",
+      alt: "Баллон 2 л",
       volume: "2 л",
       weight: "1,2 кг",
       pieces: "30 шаров",
     },
     {
       slug: "premium",
-      name: "Алмаз Premium. Баллон 3,5 литра веселящего газа",
-      icon: Star,
+      name: "Баллон 3,5 литра веселящего газа",
       description: "",
       features: [],
       price: "от 3 000 ₽",
+      sellPrice: 3200,
+      exchangePrice: 3000,
       image: "/products/premium.png",
-      alt: "Алмаз Premium — фирменный баллон",
+      alt: "Баллон 3,5 л",
       volume: "3,5 л",
       weight: "650 г",
       pieces: "12 шаров",
@@ -125,120 +135,113 @@ export function Products() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        {/* сетка: 4 колонки на lg, карточки одинаковой высоты */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-full mx-auto">
           {products.map((product, index) => {
-            const Icon = product.icon
             const isFeatured = Boolean(product.featured)
 
             return (
               <div
                 key={product.slug}
-                ref={(el) => {
-                  cardRefs.current[index] = el
-                }}
-                className={`transition-all duration-700 ${
-                  visibleCards[index] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-                }`}
+                ref={(el) => { cardRefs.current[index] = el }}
+                className={`transition-all duration-700 h-full ${visibleCards[index] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
               >
+                {/* карточка */}
                 <Card
-                  className={`relative glass-effect overflow-hidden group hover:scale-105 transition-all duration-300 shine-overlay ${
-                    isFeatured ? "border-primary border-2" : "border-primary/20"
-                  } hover:border-primary hover:shadow-[0_0_30px_rgba(0,217,255,0.5)]`}
+                  className={`relative overflow-hidden rounded-2xl p-0 bg-gradient-to-b from-background/60 to-transparent group hover:scale-[1.02] transition-transform duration-300 h-full min-h-[34rem] ${isFeatured ? "border-primary border" : "border-primary/10"}`}
                 >
+                  {/* метка "Популярный выбор" */}
                   {isFeatured && (
-                    <div className="absolute top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary to-secondary text-primary-foreground text-xs md:text-sm font-bold px-4 py-1 rounded-full shadow-lg z-10 pointer-events-none">
-                      ПОПУЛЯРНЫЙ ВЫБОР
+                    <div className="absolute top-4 left-1/2 -translate-x-1/2 z-30">
+                      <div className="bg-gradient-to-r from-primary to-secondary text-primary-foreground text-sm font-semibold px-4 py-1 rounded-full shadow-lg">
+                        {capitalizeFirst("популярный выбор")}
+                      </div>
                     </div>
                   )}
 
-                  <div className="p-6">
-                    {/* КАРТИНКА ТОВАРА */}
-                    <div className="mb-6 relative overflow-hidden rounded-xl h-48">
+                  <div className="p-6 flex flex-col h-full">
+                    {/* изображение */}
+                    <div className="relative h-72 mb-4 overflow-hidden rounded-xl bg-transparent flex items-center justify-center mt-6">
                       <Image
                         src={product.image || "/placeholder.svg"}
                         alt={product.alt}
                         fill
                         className="object-contain transition-transform duration-500 group-hover:scale-110"
+                        sizes="(max-width:768px) 80vw, 25vw"
                         loading="lazy"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent pointer-events-none" />
 
-                      {/*
-                        NEW: BADGES IN CARD — compact centered badges for product cards
-                      */}
+                      {/* BADGES (правый верхний угол) */}
                       <div className="absolute top-3 right-3 flex flex-col items-end gap-2 z-10">
                         {product.volume ? (
-                          <div className="inline-flex justify-center items-center h-8 min-w-[2rem] px-2 rounded-full bg-gray-900/70 ring-1 ring-white/10 text-white text-xs font-medium shadow-sm">
+                          <div className="inline-flex justify-center items-center h-8 min-w-[2rem] px-2 rounded-full bg-transparent ring-1 ring-white/10 text-white text-xs font-medium shadow-sm">
                             <span className="leading-none">{product.volume}</span>
                           </div>
                         ) : null}
                         {product.weight ? (
-                          <div className="inline-flex justify-center items-center h-8 min-w-[2rem] px-2 rounded-full bg-gray-900/70 ring-1 ring-white/10 text-white text-xs font-medium shadow-sm">
+                          <div className="inline-flex justify-center items-center h-8 min-w-[2rem] px-2 rounded-full bg-transparent ring-1 ring-white/10 text-white text-xs font-medium shadow-sm">
                             <span className="leading-none">{product.weight}</span>
                           </div>
                         ) : null}
                         {product.pieces ? (
-                          <div className="inline-flex justify-center items-center h-8 min-w-[2rem] px-2 rounded-full bg-gray-900/70 ring-1 ring-white/10 text-white text-xs font-medium shadow-sm">
+                          <div className="inline-flex justify-center items-center h-8 min-w-[2rem] px-2 rounded-full bg-transparent ring-1 ring-white/10 text-white text-xs font-medium shadow-sm">
                             <span className="leading-none">{product.pieces}</span>
                           </div>
                         ) : null}
                       </div>
-                      {/* END NEW */}
-
                     </div>
 
-                    <div className="flex items-start justify-between mb-4">
-                      <div className="p-3 rounded-xl bg-primary/20 border border-primary/30">
-                        <Icon className="w-8 h-8 text-primary" />
-                      </div>
-                      <div className="text-right">
-                        <div className="text-2xl font-bold text-primary">{product.price}</div>
-                      </div>
+                    {/* название центрировано */}
+                    <div className="mb-3">
+                      <h3 className="text-lg md:text-xl font-bold w-full leading-tight text-center">
+                        {product.name}
+                      </h3>
                     </div>
 
-                    <h3 className="text-2xl font-bold mb-3">{product.name}</h3>
-                    <p className="text-muted-foreground mb-4 text-pretty leading-relaxed">{product.description}</p>
+                    {/* описание по необходимости */}
+                    {product.description ? (
+                      <p className="text-muted-foreground mb-4 text-sm leading-relaxed">{product.description}</p>
+                    ) : null}
 
-                    <ul className="space-y-2 mb-6">
-                      {product.features.map((feature) => (
-                        <li key={feature} className="flex items-center gap-2 text-sm">
-                          <div className="w-1.5 h-1.5 rounded-full bg-primary" />
-                          <span>{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
+                    {/* NEW: Блок двух цен (Продажа | Обмен) — выровнены: подписи слева, суммы справа */}
+                    {(product.sellPrice !== undefined || product.exchangePrice !== undefined) && (
+                      <div className="mb-4">
+                        <div className="flex items-center justify-between mb-2">
+                          <div className="text-sm text-muted-foreground">Продажа</div>
+                          <div className="text-sm font-semibold text-right">
+                            {product.sellPrice !== undefined ? product.sellPrice.toLocaleString("ru-RU") + " ₽" : "-"}
+                          </div>
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <div className="text-sm text-muted-foreground">Обмен</div>
+                          <div className="text-sm font-semibold text-right">
+                            {product.exchangePrice !== undefined ? product.exchangePrice.toLocaleString("ru-RU") + " ₽" : "-"}
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                    {/* END NEW */}
 
-                    <div className="flex flex-col sm:flex-row gap-3 relative z-20">
-                      {/* КНОПКА: ведёт на страницу товара */}
-                      <Button
-                        variant="outline"
-                        className="flex-1 border-primary/50 hover:bg-primary/10 bg-transparent"
-                        asChild
-                      >
-                        <Link href={`/products/${product.slug}`} prefetch={false}>
+                    {/* Кнопки: Купить + Подробнее */}
+                    <div className="mt-auto">
+                      <div className="mb-3">
+                        <Button
+                          className={`w-full ${isFeatured ? "bg-gradient-to-r from-primary to-secondary hover:opacity-95 text-primary-foreground" : "bg-primary/20 hover:bg-primary/30 text-primary border border-primary/30"}`}
+                          asChild
+                        >
+                          <a href={`tel:+74958683399`} rel="noopener noreferrer">
+                            Купить
+                          </a>
+                        </Button>
+                      </div>
+
+                      <div className="text-center">
+                        <Link href={`/products/${product.slug}`} className="text-sm text-muted-foreground hover:text-primary">
                           Подробнее
                         </Link>
-                      </Button>
-
-                      {/* КНОПКА ЗАКАЗА ВЫЗОВ */}
-                      <Button
-                        className={`flex-1 ${
-                          isFeatured
-                            ? "bg-gradient-to-r from-primary to-secondary hover:opacity-90 text-primary-foreground"
-                            : "bg-primary/20 hover:bg-primary/30 text-primary border border-primary/30"
-                        }`}
-                        asChild
-                      >
-                        <a
-                          href={`tel:+74958683399`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          Заказать
-                        </a>
-                      </Button>
+                      </div>
                     </div>
+                    {/* END Кнопки */}
                   </div>
                 </Card>
               </div>

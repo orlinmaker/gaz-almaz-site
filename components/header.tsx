@@ -22,6 +22,7 @@ export function Header() {
     { href: "/#deals", label: "Акции" },
     { href: "/#products", label: "Каталог" },
     { href: "/#accessories", label: "Аксессуары" },
+    { href: "/#buy", label: "Выкуп"},
     { href: "/#poppers", label: "Попперсы" },
     { href: "/#about", label: "О компании" },
     { href: "/#safety", label: "Как это работает" },
