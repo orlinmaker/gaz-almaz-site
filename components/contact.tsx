@@ -67,19 +67,19 @@ export function Contact() {
             <div className="space-y-4">
               <div>
                 <h4 className="font-bold mb-2">Как быстро доставка?</h4>
-                <p className="text-sm text-muted-foreground text-pretty leading-relaxed">
+                <p className="text-lg text-muted-foreground text-pretty leading-relaxed">
                   Мы доставляем заказы от 30 минут по Москве и области.
                 </p>
               </div>
               <div>
                 <h4 className="font-bold mb-2">Есть ли минимальный заказ?</h4>
-                <p className="text-sm text-muted-foreground text-pretty leading-relaxed">
+                <p className="text-lg text-muted-foreground text-pretty leading-relaxed">
                   Минимальный заказ — 1 баллон. Для оптовых заказов от 5 баллонов действуют специальные цены.
                 </p>
               </div>
               <div>
                 <h4 className="font-bold mb-2">Нужен ли рецепт?</h4>
-                <p className="text-sm text-muted-foreground text-pretty leading-relaxed">
+                <p className="text-lg text-muted-foreground text-pretty leading-relaxed">
                   Нет, наша продукция предназначена для легального развлекательного применения.
                 </p>
               </div>
