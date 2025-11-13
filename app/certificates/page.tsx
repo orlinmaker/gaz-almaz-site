@@ -4,12 +4,10 @@ import { Footer } from "@/components/footer"
 import { Certificates } from "@/components/certificates"
 
 export const metadata: Metadata = {
-  title: "Сертификат — гарантия вашей безопасности — ГАЗ АЛМАЗ",
+  title: "Сертификаты — ГАЗ АЛМАЗ",
   description:
-    "Газ Алмаз работает только с сертифицированной пищевой закисью азота и оригинальными заводскими баллонами. Узнайте подробнее о сертификатах и гарантиях качества.",
-  alternates: {
-    canonical: "/certificates",
-  },
+    "Официальные сертификаты на пищевую закись азота и заводские баллоны. Безопасность и качество продукции Газ Алмаз подтверждены документально.",
+  alternates: { canonical: "/certificates" },
 }
 
 export default function CertificatesPage() {
