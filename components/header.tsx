@@ -110,7 +110,7 @@ export function Header() {
               </svg>
             </a>
             <a href="tel:+74958683399">
-              <Button className="bg-gradient-to-r from-primary to-secondary hover:opacity-90 text-primary-foreground">
+              <Button className="text-base bg-gradient-to-r from-primary to-secondary hover:opacity-90 text-primary-foreground">
                 <Phone className="w-4 h-4 mr-2" />
                 Позвонить
               </Button>

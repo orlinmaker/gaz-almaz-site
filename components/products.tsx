@@ -151,7 +151,7 @@ export function Products() {
                 >
                   {isFeatured && (
                     <div className="absolute top-4 left-1/2 -translate-x-1/2 z-30">
-                      <div className="bg-gradient-to-r from-primary to-secondary text-primary-foreground text-base font-semibold px-4 py-1 rounded-full shadow-lg">
+                      <div className="bg-gradient-to-r from-primary to-secondary text-primary-foreground text-base font-semibold px-4 py-1 rounded-full shadow-lg whitespace-nowrap">
                         {capitalizeFirst("популярный выбор")}
                       </div>
                     </div>

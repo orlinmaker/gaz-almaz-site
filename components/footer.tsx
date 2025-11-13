@@ -29,7 +29,7 @@ export function Footer() {
                 ГАЗ АЛМАЗ
               </span>
             </Link>
-            <p className="text-sm text-muted-foreground text-pretty leading-relaxed">
+            <p className="text-base text-muted-foreground text-pretty leading-relaxed">
               Веселящий газ премиум качества для незабываемых впечатлений. Безопасность, чистота, удовольствие.
             </p>
           </div>
@@ -42,7 +42,7 @@ export function Footer() {
                 <li key={`${link.href}-${link.label}`}>
                   <a
                     href={link.href}
-                    className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                    className="text-base text-muted-foreground hover:text-primary transition-colors"
                   >
                     {link.label}
                   </a>
@@ -59,7 +59,7 @@ export function Footer() {
                 <li key={`${link.href}-${link.label}`}>
                   <a
                     href={link.href}
-                    className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                    className="text-base text-muted-foreground hover:text-primary transition-colors"
                   >
                     {link.label}
                   </a>
@@ -71,10 +71,10 @@ export function Footer() {
 
         <div className="pt-8 border-t border-border">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-sm text-muted-foreground">
+            <p className="text-base text-muted-foreground">
               © {currentYear} Газ Алмаз. Все права защищены.
             </p>
-            <p className="text-xs text-muted-foreground text-center">
+            <p className="text-base text-muted-foreground text-center">
               Продукция предназначена только для совершеннолетних. Используйте ответственно.
             </p>
           </div>
