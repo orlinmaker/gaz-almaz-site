@@ -26,7 +26,7 @@ export default function ProductsPage() {
 
             <div className="p-4 flex flex-col justify-between h-full">
               <div>
-                <h3 className="text-lg font-semibold mb-2">{p.title}</h3>
+                <h3 className="text-xl font-semibold mb-2">{p.title}</h3>
                 <p className="text-sm text-muted-foreground line-clamp-2 mb-3">{p.description}</p>
                 <div className="flex flex-col gap-1 text-sm">
                   <span className="font-medium">

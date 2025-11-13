@@ -32,7 +32,7 @@ export function Contact() {
           <h2 className="text-4xl md:text-5xl font-bold font-[family-name:var(--font-heading)] mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
             Свяжитесь с нами
           </h2>
-          <p className="text-lg text-muted-foreground text-pretty leading-relaxed">
+          <p className="text-xl text-muted-foreground text-pretty leading-relaxed">
             Готовы сделать заказ или есть вопросы? Мы всегда на связи и рады помочь вам.
           </p>
         </div>

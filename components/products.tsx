@@ -126,7 +126,7 @@ export function Products() {
           <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
             Наши продукты
           </h2>
-          <p className="text-lg text-muted-foreground text-pretty leading-relaxed">
+          <p className="text-xl text-muted-foreground text-pretty leading-relaxed">
             Каждый баллон — это произведение искусства. Выберите идеальный вариант для ваших потребностей.
           </p>
         </div>
@@ -151,7 +151,7 @@ export function Products() {
                 >
                   {isFeatured && (
                     <div className="absolute top-4 left-1/2 -translate-x-1/2 z-30">
-                      <div className="bg-gradient-to-r from-primary to-secondary text-primary-foreground text-sm font-semibold px-4 py-1 rounded-full shadow-lg">
+                      <div className="bg-gradient-to-r from-primary to-secondary text-primary-foreground text-base font-semibold px-4 py-1 rounded-full shadow-lg">
                         {capitalizeFirst("популярный выбор")}
                       </div>
                     </div>
@@ -172,17 +172,17 @@ export function Products() {
                       {/* значки объёма/веса/шаров */}
                       <div className="absolute top-3 right-3 flex flex-col items-end gap-2 z-10">
                         {product.volume && (
-                          <div className="inline-flex justify-center items-center h-8 min-w-[2rem] px-2 rounded-full bg-transparent ring-1 ring-white/10 text-white text-xs font-medium shadow-sm">
+                          <div className="inline-flex justify-center items-center h-8 min-w-[2rem] px-2 rounded-full bg-transparent ring-1 ring-white/10 text-white text-base font-medium shadow-base">
                             <span>{product.volume}</span>
                           </div>
                         )}
                         {product.weight && (
-                          <div className="inline-flex justify-center items-center h-8 min-w-[2rem] px-2 rounded-full bg-transparent ring-1 ring-white/10 text-white text-xs font-medium shadow-sm">
+                          <div className="inline-flex justify-center items-center h-8 min-w-[2rem] px-2 rounded-full bg-transparent ring-1 ring-white/10 text-white text-base font-medium shadow-base">
                             <span>{product.weight}</span>
                           </div>
                         )}
                         {product.pieces && (
-                          <div className="inline-flex justify-center items-center h-8 min-w-[2rem] px-2 rounded-full bg-transparent ring-1 ring-white/10 text-white text-xs font-medium shadow-sm">
+                          <div className="inline-flex justify-center items-center h-8 min-w-[2rem] px-2 rounded-full bg-transparent ring-1 ring-white/10 text-white text-base  font-medium shadow-base">
                             <span>{product.pieces}</span>
                           </div>
                         )}
@@ -191,7 +191,7 @@ export function Products() {
 
                     {/* название */}
                     <div className="mb-3">
-                      <h3 className="text-lg md:text-xl font-bold w-full leading-tight text-center">
+                      <h3 className="text-xl md:text-xl font-bold w-full leading-tight text-center">
                         {product.name}
                       </h3>
                     </div>
@@ -200,20 +200,20 @@ export function Products() {
                     {(product.sellPrice !== undefined || product.exchangePrice !== undefined) && (
                       <div className="mb-4">
                         <div className="flex items-center justify-between mb-2">
-                          <div className="text-sm text-muted-foreground">Продажа</div>
-                          <div className="text-sm font-semibold text-right">
+                          <div className="text-lg text-muted-foreground">Продажа</div>
+                          <div className="text-lg font-semibold text-right">
                             {product.sellPrice?.toLocaleString("ru-RU")} ₽
                           </div>
                         </div>
                         <div className="flex items-center justify-between mb-2">
-                          <div className="text-sm text-muted-foreground">Обмен</div>
-                          <div className="text-sm font-semibold text-right">
+                          <div className="text-lg text-muted-foreground">Обмен</div>
+                          <div className="text-lg font-semibold text-right">
                             {product.exchangePrice?.toLocaleString("ru-RU")} ₽
                           </div>
                         </div>
 
                         {/* надпись о скидке */}
-                        <div className="text-center text-[13px] font-medium text-cyan-400 mt-3">
+                        <div className="text-center text-[18px] font-medium text-cyan-400 mt-3">
                           При оплате наличными — скидка 200 ₽
                         </div>
                       </div>
@@ -225,8 +225,8 @@ export function Products() {
                         <Button
                           className={`w-full ${
                             isFeatured
-                              ? "bg-gradient-to-r from-primary to-secondary hover:opacity-95 text-primary-foreground"
-                              : "bg-primary/20 hover:bg-primary/30 text-primary border border-primary/30"
+                              ? "bg-gradient-to-r from-primary to-secondary hover:opacity-95 text-primary-foreground text-base"
+                              : "bg-primary/20 hover:bg-primary/30 text-primary border border-primary/30 text-base"
                           }`}
                           asChild
                         >
@@ -239,7 +239,7 @@ export function Products() {
                       <div className="text-center">
                         <Link
                           href={`/products/${product.slug}`}
-                          className="text-sm text-muted-foreground hover:text-primary"
+                          className="text-base text-muted-foreground hover:text-primary text-base"
                         >
                           Подробнее
                         </Link>

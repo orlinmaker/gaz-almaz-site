@@ -34,7 +34,7 @@ export function About() {
           <h2 className="text-4xl md:text-5xl font-bold font-[family-name:var(--font-heading)] mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
             Почему выбирают нас
           </h2>
-          <p className="text-lg text-muted-foreground text-pretty leading-relaxed">
+          <p className="text-xl text-muted-foreground text-pretty leading-relaxed">
             Газ Алмаз — это сочетание безупречного качества, безопасности и заботы о ваших впечатлениях. Мы предлагаем
             только лучший веселящий газ для вашего комфорта и удовольствия.
           </p>
@@ -53,7 +53,7 @@ export function About() {
                     <Icon className="w-8 h-8 text-primary" />
                   </div>
                   <h3 className="text-xl font-bold font-[family-name:var(--font-heading)]">{feature.title}</h3>
-                  <p className="text-sm text-muted-foreground text-pretty leading-relaxed">{feature.description}</p>
+                  <p className="text-lg text-muted-foreground text-pretty leading-relaxed">{feature.description}</p>
                 </div>
               </Card>
             )
@@ -66,12 +66,12 @@ export function About() {
               <h3 className="text-3xl font-bold font-[family-name:var(--font-heading)] mb-4 text-balance">
                 О компании Газ Алмаз
               </h3>
-              <p className="text-muted-foreground mb-4 text-pretty leading-relaxed">
+              <p className="text-xl text-muted-foreground mb-4 text-pretty leading-relaxed">
                 Мы специализируемся на поставке веселящих газов премиум качества для легального развлекательного
                 применения. Наша миссия — обеспечить безопасность, чистоту и незабываемые впечатления на ваших
                 мероприятиях.
               </p>
-              <p className="text-muted-foreground text-pretty leading-relaxed">
+              <p className="text-xl text-muted-foreground text-pretty leading-relaxed">
                 Каждый баллон проходит строгий контроль качества и соответствует всем необходимым стандартам и
                 регламентам. Мы гордимся нашей репутацией и доверием клиентов.
               </p>

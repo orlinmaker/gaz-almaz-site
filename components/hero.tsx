@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
+import Image from "next/image"
 import { DiamondLogo } from "./diamond-logo"
 
 export function Hero() {
@@ -51,15 +52,23 @@ export function Hero() {
             </span>
           </h1>
 
-          {/* 🎁 Бейдж акции */}
+          {/* 🎁 Бейдж акции с иконкой /gifts.png */}
           <div className="flex justify-center mb-8">
-            <span className="inline-flex items-center px-5 py-2 rounded-full text-sm font-semibold text-primary-foreground bg-gradient-to-r from-primary to-secondary shadow-lg shadow-primary/30 animate-pulse">
-              🎁 Подарок каждому новому клиенту!
+            <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xl font-bold text-primary-foreground bg-gradient-to-r from-primary to-secondary shadow-lg shadow-primary/30 animate-pulse">
+              <Image
+                src="/gifts.png"
+                alt="Подарок"
+                width={20}
+                height={20}
+                className="shrink-0"
+                priority
+              />
+              Подарок каждому новому клиенту!
             </span>
           </div>
 
           {/* Подзаголовок */}
-          <p className="text-base md:text-lg text-muted-foreground mb-12 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base md:text-xl text-muted-foreground mb-12 max-w-2xl mx-auto leading-relaxed">
             Веселящий газ премиум качества для легального развлекательного применения. Безопасность, чистота и
             незабываемые впечатления на ваших мероприятиях.
           </p>
@@ -69,7 +78,7 @@ export function Hero() {
             <a href="#products">
               <Button
                 size="lg"
-                className="bg-gradient-to-r from-primary to-secondary hover:opacity-90 text-primary-foreground text-lg px-8 py-6 group"
+                className="bg-gradient-to-r from-primary to-secondary hover:opacity-90 text-primary-foreground text-xl px-8 py-6 group"
               >
                 Каталог
                 <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -79,7 +88,7 @@ export function Hero() {
               <Button
                 size="lg"
                 variant="outline"
-                className="text-lg px-8 py-6 border-primary/50 hover:bg-primary/10 bg-transparent text-foreground"
+                className="text-xl px-8 py-6 border-primary/50 hover:bg-primary/10 bg-transparent text-foreground"
               >
                 Связаться
               </Button>

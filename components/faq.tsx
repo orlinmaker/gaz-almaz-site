@@ -47,7 +47,7 @@ export function FAQ() {
           <h2 className="text-4xl md:text-5xl font-bold font-[family-name:var(--font-heading)] mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
             Часто задаваемые вопросы
           </h2>
-          <p className="text-lg text-muted-foreground text-pretty leading-relaxed">
+          <p className="text-xl text-muted-foreground text-pretty leading-relaxed">
             Ответы на самые популярные вопросы о наших продуктах и услугах
           </p>
         </div>
@@ -62,7 +62,7 @@ export function FAQ() {
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
                 className="w-full p-6 text-left flex items-center justify-between gap-4 group"
               >
-                <h3 className="text-lg font-bold font-[family-name:var(--font-heading)] group-hover:text-primary transition-colors">
+                <h3 className="text-xl font-bold font-[family-name:var(--font-heading)] group-hover:text-primary transition-colors">
                   {faq.question}
                 </h3>
                 <ChevronDown
@@ -77,7 +77,7 @@ export function FAQ() {
                 }`}
               >
                 <div className="px-6 pb-6">
-                  <p className="text-muted-foreground text-pretty leading-relaxed">{faq.answer}</p>
+                  <p className="text-lg text-muted-foreground text-pretty leading-relaxed">{faq.answer}</p>
                 </div>
               </div>
             </Card>
@@ -85,10 +85,10 @@ export function FAQ() {
         </div>
 
         <div className="mt-12 text-center">
-          <p className="text-muted-foreground mb-4">Не нашли ответ на свой вопрос?</p>
+          <p className="text-lg text-muted-foreground mb-4">Не нашли ответ на свой вопрос?</p>
           <a
             href="#contact"
-            className="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-gradient-to-r from-primary to-secondary text-primary-foreground font-medium hover:opacity-90 transition-opacity"
+            className="text-base inline-flex items-center justify-center px-6 py-3 rounded-lg bg-gradient-to-r from-primary to-secondary text-primary-foreground font-medium hover:opacity-90 transition-opacity"
           >
             Свяжитесь с нами
           </a>

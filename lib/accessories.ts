@@ -10,8 +10,8 @@ export type Accessory = {
 export const accessories: Accessory[] = [
   {
     id: "balloons",
-    name: "Шарики",
-    description: "Шарики торговой марки GEMAR",
+    name: "Шарики GEMAR",
+    description: "",
     priceLabel: "5 шт. - 200 ₽, 25 шт. - 700 ₽",
     image: "/accessories/balloons.png",
     features: ["Латекс", "Разные цвета", "Размер (Д × Ш × В) — 30 см х 20 см х 2 см"]
@@ -19,7 +19,7 @@ export const accessories: Accessory[] = [
   {
     id: "nozzles",
     name: "Заглушка для баллонов",
-    description: "Совместимы со всеми моделями",
+    description: "",
     priceLabel: "2 000 ₽",
     image: "/accessories/nozzles.png",
     features: ["Вес — 61 (г)", "Материал корпуса — алюминий"]
@@ -27,7 +27,7 @@ export const accessories: Accessory[] = [
   {
     id: "stand",
     name: "Подставка для баллона",
-    description: "Стойка для безопасной фиксации баллона.",
+    description: "",
     priceLabel: "1 500 ₽",
     image: "/accessories/stand.png",
     features: ["Вес — 0.8 (кг)", "Диаметр, см — 18,5", "Материал — резина"]
