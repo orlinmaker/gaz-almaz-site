@@ -10,7 +10,7 @@ interface DiamondLogoProps {
 export function DiamondLogo({ size = 140, className = "" }: DiamondLogoProps) {
   return (
     <Image
-      src="/logo/logo_diamond.png"  // PNG без фона
+      src="/logo/logo_diamond.webp"  // PNG без фона
       alt="Газ Алмаз"
       width={size}
       height={size}

@@ -8,37 +8,37 @@ const deals = [
     id: "free-balloons",
     title: "5 500 ₽",
     description: "Заказать 2 баллона 3,5 л выгоднее!",
-    image: "/deals/deals1.png",
+    image: "/deals/deals1.webp",
   },  
   {
     id: "two-35",
     title: "6 500 ₽",
     description: "Три баллона 3,5 л — выгодный набор!",
-    image: "/deals/deals2.png",
+    image: "/deals/deals2.webp",
   },
   {
     id: "three-35",
     title: "500 ₽",
     description: "Скидка на День Рождения!",
-    image: "/deals/deals3.png",
+    image: "/deals/deals3.webp",
   },
   {
     id: "refill-bonus",
     title: "300 ₽",
     description: "Скидка с Понедельника по Четверг с 9 до 17 часов.",
-    image: "/deals/deals4.png",
+    image: "/deals/deals4.webp",
   },
   {
     id: "late-discount",
     title: "Бесплатный обмен",
     description: "10 л на 2 баллона 3,5 л",
-    image: "/deals/deals5.png",
+    image: "/deals/deals5.webp",
   },
   {
     id: "vip-offer",
     title: "2 700 ₽",
     description: "Баллон 3,5 л + Попперс",
-    image: "/deals/deals6.png",
+    image: "/deals/deals6.webp",
   },
 ] as const
 

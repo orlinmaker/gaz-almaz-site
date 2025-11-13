@@ -54,7 +54,7 @@ export function Accessories() {
       name: "",
       description: "",
       priceLabel: "",
-      image: "/accessories/18years.png",
+      image: "/accessories/18years.webp",
       isBanner: true,
     },
   ]
