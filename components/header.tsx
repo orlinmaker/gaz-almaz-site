@@ -20,13 +20,13 @@ export function Header() {
   const navItems = [
     { href: "/#hero", label: "Главная" },
     { href: "/#deals", label: "Акции" },
-    { href: "/#products", label: "Каталог" },
-    { href: "/#buy", label: "Выкуп"},
-    { href: "/#accessories", label: "Аксессуары" },
-    { href: "/#poppers", label: "Попперсы" },
+    { href: "/products", label: "Каталог" },
+    { href: "/products/#buy", label: "Выкуп"},
+    { href: "/accessories", label: "Аксессуары" },
+    { href: "/poppers", label: "Попперсы" },
     { href: "/#about", label: "О компании" },
     { href: "/#safety", label: "Как это работает" },
-    { href: "/#faq", label: "FAQ" },
+    { href: "/faq", label: "FAQ" },
     { href: "/#contact", label: "Контакты" },
   ] as const
 
