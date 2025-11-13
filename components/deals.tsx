@@ -90,13 +90,7 @@ export function Deals() {
               }`}
             >
               {/* картинка */}
-              {/* 
-                NEW:
-                - changed h-56 -> h-80 to give more vertical room
-                - use object-contain instead of object-cover so the full image fits
-                - centered container (flex) so image sits nicely
-                - set quality prop to 100 to preserve image quality when Next processes it
-              */}
+
               <div className="relative w-full h-80 rounded-2xl overflow-hidden flex items-center justify-center bg-transparent">
                 <Image
                   src={deal.image}

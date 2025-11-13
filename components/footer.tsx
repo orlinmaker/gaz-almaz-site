@@ -6,14 +6,14 @@ export function Footer() {
 
   const footerLinks = {
     company: [
-      { label: "О нас", href: "#about" },
-      { label: "Продукты", href: "#products" },
-      { label: "Контакты", href: "#contact" },
+      { label: "О нас", href: "/#about" },
+      { label: "Продукты", href: "/#products" },
+      { label: "Контакты", href: "/#contact" },
     ],
     legal: [
       { label: "Политика конфиденциальности", href: "#" },
       { label: "Условия использования", href: "#" },
-      { label: "Сертификаты", href: "#" },
+      { label: "Сертификаты", href: "/certificates" },
     ],
   }
 
