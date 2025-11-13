@@ -16,10 +16,10 @@ export function Hero() {
 
       <div className="container mx-auto px-4 py-32 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
-          {/* Логотип со свечением (без квадратов) */}
+          {/* Логотип со свечением */}
           <div className="flex justify-center mb-8">
             <div className="relative flex items-center justify-center">
-              {/* ВНЕШНИЙ ОРЕОЛ — radial-gradient + inline animation */}
+              {/* ВНЕШНИЙ ОРЕОЛ */}
               <div
                 aria-hidden
                 className="pointer-events-none absolute -inset-10 rounded-full blur-3xl z-0"
@@ -37,7 +37,7 @@ export function Hero() {
                   background: "radial-gradient(closest-side, rgba(76,255,248,0.35), rgba(0,0,0,0) 70%)",
                 }}
               />
-              {/* Сам логотип поверх */}
+              {/* Сам логотип */}
               <div className="relative z-10">
                 <DiamondLogo size={140} />
               </div>
@@ -45,15 +45,22 @@ export function Hero() {
           </div>
 
           {/* Заголовок */}
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 text-balance">
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-4 text-balance">
             <span className="bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent">
               Открой грани удовольствия с «Газ Алмаз»
             </span>
           </h1>
 
+          {/* 🎁 Бейдж акции */}
+          <div className="flex justify-center mb-8">
+            <span className="inline-flex items-center px-5 py-2 rounded-full text-sm font-semibold text-primary-foreground bg-gradient-to-r from-primary to-secondary shadow-lg shadow-primary/30 animate-pulse">
+              🎁 Подарок каждому новому клиенту!
+            </span>
+          </div>
+
           {/* Подзаголовок */}
           <p className="text-base md:text-lg text-muted-foreground mb-12 max-w-2xl mx-auto leading-relaxed">
-            Веселящие газы премиум качества для легального развлекательного применения. Безопасность, чистота и
+            Веселящий газ премиум качества для легального развлекательного применения. Безопасность, чистота и
             незабываемые впечатления на ваших мероприятиях.
           </p>
 
