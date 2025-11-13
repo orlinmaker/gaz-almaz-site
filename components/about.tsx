@@ -80,7 +80,7 @@ export function About() {
             <div className="relative">
               {/* Заменён линк на новое изображение */}
               <img
-                src="/gas-balloon-with-logo.png"
+                src="/gas-balloon-with-logo.webp"
                 alt="Газ Алмаз — баллон и шар с логотипом"
                 className="w-full h-auto rounded-2xl shadow-lg shadow-primary/20"
               />

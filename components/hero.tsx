@@ -56,7 +56,7 @@ export function Hero() {
           <div className="flex justify-center mb-8">
             <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xl font-bold text-primary-foreground bg-gradient-to-r from-primary to-secondary shadow-lg shadow-primary/30 animate-pulse">
               <Image
-                src="/gifts.png"
+                src="/gifts.webp"
                 alt="Подарок"
                 width={20}
                 height={20}
