@@ -9,7 +9,7 @@ const deals = [
     title: "5 500 ₽",
     description: "Заказать 2 баллона 3,5 л выгоднее!",
     image: "/deals/deals1.png",
-  },
+  },  
   {
     id: "two-35",
     title: "6 500 ₽",
@@ -73,7 +73,7 @@ export function Deals() {
           <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
             Акции
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Самые выгодные предложения для клиентов
           </p>
         </div>
@@ -113,7 +113,7 @@ export function Deals() {
               <h3 className="text-2xl font-bold mt-6 mb-2">{deal.title}</h3>
 
               {/* описание */}
-              <p className="text-muted-foreground leading-relaxed max-w-[260px]">
+              <p className="text-lg text-muted-foreground text-center leading-relaxed max-w-[260px]">
                 {deal.description}
               </p>
             </div>

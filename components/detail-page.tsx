@@ -129,7 +129,7 @@ export function DetailPage({
               {title}
             </h1>
 
-            <p className="text-lg text-muted-foreground mb-6 leading-relaxed text-pretty">{description}</p>
+            <p className="text-xl text-muted-foreground mb-6 leading-relaxed text-pretty">{description}</p>
 
             {/* Блок цен */}
             {(priceBuy || priceExchange || fallbackPrice) && (

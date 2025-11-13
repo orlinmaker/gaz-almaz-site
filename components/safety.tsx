@@ -41,7 +41,7 @@ export function Safety() {
           <h2 className="text-4xl md:text-5xl font-bold font-[family-name:var(--font-heading)] mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
             Безопасность и инструкции
           </h2>
-          <p className="text-lg text-muted-foreground text-pretty leading-relaxed">
+          <p className="text-xl text-muted-foreground text-pretty leading-relaxed">
             Ваша безопасность — наш приоритет. Пожалуйста, внимательно ознакомьтесь с правилами использования.
           </p>
         </div>
@@ -58,8 +58,8 @@ export function Safety() {
                   <div className="p-4 rounded-2xl bg-primary/10">
                     <Icon className="w-8 h-8 text-primary" />
                   </div>
-                  <h3 className="text-lg font-bold font-[family-name:var(--font-heading)]">{rule.title}</h3>
-                  <p className="text-sm text-muted-foreground text-pretty leading-relaxed">{rule.description}</p>
+                  <h3 className="text-xl font-bold font-[family-name:var(--font-heading)]">{rule.title}</h3>
+                  <p className="text-lg text-muted-foreground text-pretty leading-relaxed">{rule.description}</p>
                 </div>
               </Card>
             )
@@ -75,14 +75,14 @@ export function Safety() {
               {instructions.map((instruction, index) => (
                 <div key={index} className="flex items-start gap-3">
                   <div className="flex-shrink-0 w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center mt-0.5">
-                    <span className="text-xs font-bold text-primary">{index + 1}</span>
+                    <span className="text-lg font-bold text-primary">{index + 1}</span>
                   </div>
-                  <p className="text-sm text-muted-foreground text-pretty leading-relaxed">{instruction}</p>
+                  <p className="text-lg text-muted-foreground text-pretty leading-relaxed">{instruction}</p>
                 </div>
               ))}
             </div>
             <div className="mt-8 p-4 rounded-xl bg-primary/10 border border-primary/20">
-              <p className="text-sm text-center text-muted-foreground">
+              <p className="text-lg text-center text-muted-foreground">
                 <strong className="text-foreground">Важно:</strong> Продукция предназначена только для совершеннолетних.
                 Перед использованием проконсультируйтесь с врачом при наличии хронических заболеваний.
               </p>

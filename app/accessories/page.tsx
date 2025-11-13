@@ -24,7 +24,7 @@ export default function AccessoriesPage() {
                 />
               </div>
               <div className="p-4">
-                <h3 className="text-lg font-semibold group-hover:underline">{a.name}</h3>
+                <h3 className="text-xl font-semibold group-hover:underline">{a.name}</h3>
                 <p className="text-sm text-muted-foreground line-clamp-2">{a.description}</p>
                 <div className="mt-3 font-medium">{a.priceLabel}</div>
               </div>

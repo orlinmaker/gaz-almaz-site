@@ -66,7 +66,7 @@ export function Accessories() {
           <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
             Аксессуары и комплектующие
           </h2>
-          <p className="text-lg text-muted-foreground text-pretty leading-relaxed">
+          <p className="text-xl text-muted-foreground text-pretty leading-relaxed">
             Всё необходимое для комфортного использования веселящего газа
           </p>
         </div>
@@ -119,22 +119,27 @@ export function Accessories() {
 
                     {/* Заголовок */}
                     <div className="mb-2">
-                      <h3 className="text-lg md:text-xl font-bold w-full leading-tight text-center">
+                      <h3 className="text-xl md:text-xl font-bold w-full leading-tight text-center">
                         {item.name}
                       </h3>
                     </div>
 
                     {/* Описание (если есть) */}
                     {item.description ? (
-                      <p className="text-muted-foreground mb-3 text-sm leading-relaxed text-center">
+                      <p className="text-xl text-muted-foreground mb-3 leading-relaxed text-center">
                         {item.description}
                       </p>
                     ) : null}
 
-                    {/* Цена (если есть) */}
+                    {/* Стоимость — стиль как в products (подпись слева, цена справа) */}
                     {item.priceLabel ? (
-                      <div className="mb-3 text-center">
-                        <div className="text-primary font-semibold text-lg">{item.priceLabel}</div>
+                      <div className="mb-4">
+                        <div className="flex items-center justify-between">
+                          <div className="text-lg text-muted-foreground">Стоимость</div>
+                          <div className="text-lg font-semibold text-right">
+                            {item.priceLabel}
+                          </div>
+                        </div>
                       </div>
                     ) : null}
 
@@ -142,7 +147,7 @@ export function Accessories() {
                     <div className="mt-auto">
                       <div className="mb-3">
                         <Button
-                          className="w-full bg-primary/20 hover:bg-primary/30 text-primary border border-primary/30"
+                          className="text-base w-full bg-primary/20 hover:bg-primary/30 text-primary border border-primary/30"
                           asChild
                         >
                           <a href="tel:+74958683399" rel="noopener noreferrer">
@@ -153,7 +158,7 @@ export function Accessories() {
                       <div className="text-center">
                         <Link
                           href={`/accessories/${item.id}`}
-                          className="text-sm text-muted-foreground hover:text-primary"
+                          className="text-base text-muted-foreground hover:text-primary"
                         >
                           Подробнее
                         </Link>

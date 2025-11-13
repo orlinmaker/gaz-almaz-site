@@ -36,7 +36,7 @@ export function Applications() {
           <h2 className="text-4xl md:text-5xl font-bold font-[family-name:var(--font-heading)] mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
             Где использовать
           </h2>
-          <p className="text-lg text-muted-foreground text-pretty leading-relaxed">
+          <p className="text-xl text-muted-foreground text-pretty leading-relaxed">
             Газ Алмаз подходит для любых мероприятий, где вы хотите создать особую атмосферу и подарить незабываемые
             впечатления.
           </p>

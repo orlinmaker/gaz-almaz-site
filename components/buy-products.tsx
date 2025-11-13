@@ -86,7 +86,7 @@ export function BuyProducts() {
           <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
             Выкупим пустые баллоны
           </h2>
-          <p className="text-lg text-muted-foreground text-pretty leading-relaxed">
+          <p className="text-xl text-muted-foreground text-pretty leading-relaxed">
             Продаёте пустые баллоны? Принимаем по фиксированной цене — выберите вашу модель и оформите продажу.
           </p>
         </div>
@@ -105,7 +105,6 @@ export function BuyProducts() {
             >
               <Card className="relative overflow-hidden rounded-2xl p-0 bg-gradient-to-b from-background/60 to-transparent group hover:scale-[1.02] transition-transform duration-300 h-full min-h-[28rem] border-primary/10">
                 <div className="p-5 flex flex-col h-full">
-                  
                   {/* изображение — размер как в products */}
                   <div className="relative h-72 mb-4 overflow-hidden rounded-xl bg-transparent flex items-center justify-center">
                     <Image
@@ -121,12 +120,12 @@ export function BuyProducts() {
                     {/* объём и вес */}
                     <div className="absolute top-3 right-3 flex flex-col items-end gap-2 z-10">
                       {item.volume && (
-                        <div className="inline-flex justify-center items-center h-8 min-w-[2rem] px-2 rounded-full bg-transparent ring-1 ring-white/10 text-white text-xs font-medium shadow-sm">
+                        <div className="inline-flex justify-center items-center h-8 min-w-[2rem] px-2 rounded-full bg-transparent ring-1 ring-white/10 text-white text-base font-medium shadow-sm">
                           <span>{item.volume}</span>
                         </div>
                       )}
                       {item.weight && (
-                        <div className="inline-flex justify-center items-center h-8 min-w-[2rem] px-2 rounded-full bg-transparent ring-1 ring-white/10 text-white text-xs font-medium shadow-sm">
+                        <div className="inline-flex justify-center items-center h-8 min-w-[2rem] px-2 rounded-full bg-transparent ring-1 ring-white/10 text-white text-base font-medium shadow-sm">
                           <span>{item.weight}</span>
                         </div>
                       )}
@@ -135,23 +134,23 @@ export function BuyProducts() {
 
                   {/* название */}
                   <div className="mb-2">
-                    <h3 className="text-lg md:text-xl font-bold w-full leading-tight text-center">
+                    <h3 className="text-xl md:text-xl font-bold w-full leading-tight text-center">
                       {item.name}
                     </h3>
                   </div>
 
-                  {/* стоимость */}
-                  <div className="mb-1">
-                    <div className="flex items-center justify-between">
-                      <div className="text-sm text-muted-foreground">Стоимость</div>
-                      <div className="text-sm font-semibold text-primary">{item.priceLabel}</div>
+                  {/* стоимость — стиль как в products (Продажа/Обмен) */}
+                  <div className="mb-4">
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="text-lg text-muted-foreground">Стоимость</div>
+                      <div className="text-lg font-semibold text-right">{item.priceLabel}</div>
                     </div>
                   </div>
 
                   {/* кнопка — ближе к низу */}
-                  <div className="mt-1 mb-1">
+                  <div className="mt-auto">
                     <Button
-                      className="w-full bg-primary/20 hover:bg-primary/30 text-primary border border-primary/30"
+                      className="text-base w-full bg-primary/20 hover:bg-primary/30 text-primary border border-primary/30"
                       asChild
                     >
                       <a href="tel:+74958683399" rel="noopener noreferrer">
