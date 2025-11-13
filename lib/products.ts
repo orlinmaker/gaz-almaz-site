@@ -17,7 +17,7 @@ export const products: Product[] = [
     title: "Refill",
     description: "N2O - пищевая закись азота, ГОСТ - 949-73, Сертификация - № РОСС RU.HX05.H00746",
     priceBuy: 14000,
-    priceExchange: 8500,
+    priceExchange: 8000,
     image: "/products/refill.png",
     features: ["Вес - 6,2 кг", "Ëмкость - 10 литров", "Изготовитель - MGS (Череповец)"]
   },

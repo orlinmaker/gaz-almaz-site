@@ -1,110 +1,169 @@
 "use client"
+
 import { Button } from "@/components/ui/button"
 import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
-import { accessories } from "@/lib/accessories"
 import Link from "next/link"
+import { Card } from "@/components/ui/card"
+import { accessories } from "@/lib/accessories"
+
+// Локальный тип + поддержка баннера
+type AccessoryBase = {
+  id: string
+  name: string
+  description: string
+  priceLabel: string
+  image: string
+}
+type AccessoryCard = AccessoryBase & { isBanner?: boolean }
 
 export function Accessories() {
-  const [visibleCards, setVisibleCards] = useState<Set<number>>(new Set())
-  const observerRef = useRef<IntersectionObserver | null>(null)
+  const [visibleCards, setVisibleCards] = useState<boolean[]>([])
   const cardRefs = useRef<(HTMLDivElement | null)[]>([])
 
   useEffect(() => {
-    observerRef.current = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const idx = Number(entry.target.getAttribute("data-index"))
-            setVisibleCards((prev) => {
-              const next = new Set(prev)
-              next.add(idx)
-              return next
-            })
-            observerRef.current?.unobserve(entry.target)
-          }
-        })
-      },
-      { threshold: 0.12, rootMargin: "0px 0px -10% 0px" },
-    )
-
-    cardRefs.current.forEach((el) => {
-      if (el) observerRef.current!.observe(el)
+    const observers = cardRefs.current.map((el, idx) => {
+      if (!el) return null
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              setVisibleCards((prev) => {
+                const next = [...prev]
+                next[idx] = true
+                return next
+              })
+              io.unobserve(e.target)
+            }
+          })
+        },
+        { threshold: 0.1 },
+      )
+      io.observe(el)
+      return io
     })
 
-    return () => observerRef.current?.disconnect()
+    return () => observers.forEach((o) => o?.disconnect())
   }, [])
 
+  // Добавляем баннер 18+ последней карточкой
+  const cards: AccessoryCard[] = [
+    ...(accessories as AccessoryBase[]),
+    {
+      id: "banner18",
+      name: "",
+      description: "",
+      priceLabel: "",
+      image: "/accessories/18years.png",
+      isBanner: true,
+    },
+  ]
+
   return (
-    <section id="accessories" className="py-24 md:py-32 relative sparkle-bg">
+    <section id="accessories" className="py-24 md:py-32 relative">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent">
+        <div className="max-w-3xl mx-auto text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
             Аксессуары и комплектующие
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-pretty leading-relaxed">
-            Всё необходимое для комфортного использования медицинских газов
+          <p className="text-lg text-muted-foreground text-pretty leading-relaxed">
+            Всё необходимое для комфортного использования веселящего газа
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {accessories.map((accessory, index) => {
-            return (
-              <div
-                key={accessory.id}
-                data-index={index}
-                ref={(el) => {
-                  cardRefs.current[index] = el
-                }}
-                className={`relative glass-effect rounded-2xl p-6 border-2 border-primary/20 hover:border-primary/50 transition-all duration-500 card-shine group ${
-                  visibleCards.has(index) ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+        {/* 4 колонки на lg, как в products */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-full mx-auto">
+          {cards.map((item, index) => (
+            <div
+              key={item.id}
+              ref={(el) => { cardRefs.current[index] = el }}
+              className={`transition-all duration-700 h-full ${
+                visibleCards[index] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+              }`}
+            >
+              {/* Карточка */}
+              <Card
+                className={`relative overflow-hidden rounded-2xl p-0 h-full min-h-[26rem] border-primary/10 ${
+                  item.isBanner ? "" : "bg-gradient-to-b from-background/60 to-transparent group hover:scale-[1.02] transition-transform duration-300"
                 }`}
-                style={{ transitionDelay: `${index * 100}ms` }}
               >
-                <div className="flex flex-col items-center text-center">
-                  <div className="relative w-full aspect-[16/9] mb-6 rounded-xl overflow-hidden group-hover:scale-105 transition-transform duration-500">
+                {/* --- БАННЕР: только картинка, без текста/кнопок --- */}
+                {item.isBanner ? (
+                  <div className="absolute inset-0">
                     <Image
-                      src={accessory.image || "/placeholder.svg"}
-                      alt={accessory.id === "balloons" ? "Шарики для мероприятий" : accessory.name}
-                      fill
-                      sizes="(min-width:1024px) 380px, (min-width:768px) 560px, 100vw"
-                      quality={88}
-                      className="object-contain"
-                      loading="lazy"
-                      decoding="async"
+                      src={item.image}
+                      alt="18+ баннер"
+                      width={900}
+                      height={1200}
+                      className="w-full h-full object-cover"
+                      quality={100}
+                      sizes="(max-width:640px) 100vw, (max-width:1024px) 50vw, 25vw"
+                      priority
                     />
-                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent" />
                   </div>
+                ) : (
+                  <div className="p-5 flex flex-col h-full">
+                    {/* Картинка ближе к верху */}
+                    <div className="relative h-56 mb-3 overflow-hidden rounded-xl bg-transparent flex items-center justify-center">
+                      <Image
+                        src={item.image || "/placeholder.svg"}
+                        alt={item.name}
+                        width={900}
+                        height={1200}
+                        className="w-full h-full object-contain"
+                        sizes="(max-width:768px) 100vw, (max-width:1024px) 50vw, 25vw"
+                        quality={92}
+                        loading="lazy"
+                      />
+                    </div>
 
-                  <h3 className="text-2xl font-bold mb-3 text-foreground">{accessory.name}</h3>
-                  <p className="text-muted-foreground mb-4 leading-relaxed">{accessory.description}</p>
-                  <p className="text-xl font-semibold text-primary mb-6">{accessory.priceLabel}</p>
+                    {/* Заголовок */}
+                    <div className="mb-2">
+                      <h3 className="text-lg md:text-xl font-bold w-full leading-tight text-center">
+                        {item.name}
+                      </h3>
+                    </div>
 
-                  <div className="relative z-20 flex flex-col sm:flex-row gap-3 w-full">
-                    <Button
-                      variant="outline"
-                      className="flex-1 border-primary/50 hover:bg-primary/10 bg-transparent"
-                      asChild
-                    >
-                      <Link href={`/accessories/${accessory.id}`}>Подробнее</Link>
-                    </Button>
-                    <Button
-                      className="flex-1 bg-gradient-to-r from-primary to-secondary hover:opacity-90 text-primary-foreground"
-                      asChild
-                    >
-                      <a
-                        href={'tel:+74958683399'}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Заказать
-                      </a>
-                    </Button>
+                    {/* Описание (если есть) */}
+                    {item.description ? (
+                      <p className="text-muted-foreground mb-3 text-sm leading-relaxed text-center">
+                        {item.description}
+                      </p>
+                    ) : null}
+
+                    {/* Цена (если есть) */}
+                    {item.priceLabel ? (
+                      <div className="mb-3 text-center">
+                        <div className="text-primary font-semibold text-lg">{item.priceLabel}</div>
+                      </div>
+                    ) : null}
+
+                    {/* Кнопки: Купить + Подробнее (две строки) */}
+                    <div className="mt-auto">
+                      <div className="mb-3">
+                        <Button
+                          className="w-full bg-primary/20 hover:bg-primary/30 text-primary border border-primary/30"
+                          asChild
+                        >
+                          <a href="tel:+74958683399" rel="noopener noreferrer">
+                            Купить
+                          </a>
+                        </Button>
+                      </div>
+                      <div className="text-center">
+                        <Link
+                          href={`/accessories/${item.id}`}
+                          className="text-sm text-muted-foreground hover:text-primary"
+                        >
+                          Подробнее
+                        </Link>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-            )
-          })}
+                )}
+              </Card>
+            </div>
+          ))}
         </div>
       </div>
     </section>

@@ -12,16 +12,12 @@ type Product = {
   name: string
   description?: string
   features?: string[]
-  // старое поле оставляем на совместимость
   price: string
-  // NEW: явные числовые поля для продаж/обмена
   sellPrice?: number
   exchangePrice?: number
-
   image: string
   alt: string
   featured?: boolean
-
   volume?: string
   weight?: string
   pieces?: string
@@ -44,8 +40,8 @@ export function Products() {
       features: [],
       featured: true,
       price: "от 8 500 ₽",
-      sellPrice: 14000,      // NEW
-      exchangePrice: 8500,   // NEW
+      sellPrice: 14000,
+      exchangePrice: 8000,
       image: "/products/refill.png",
       alt: "Баллон 10 л",
       volume: "10 л",
@@ -135,7 +131,7 @@ export function Products() {
           </p>
         </div>
 
-        {/* сетка: 4 колонки на lg, карточки одинаковой высоты */}
+        {/* сетка карточек */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-full mx-auto">
           {products.map((product, index) => {
             const isFeatured = Boolean(product.featured)
@@ -144,13 +140,15 @@ export function Products() {
               <div
                 key={product.slug}
                 ref={(el) => { cardRefs.current[index] = el }}
-                className={`transition-all duration-700 h-full ${visibleCards[index] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+                className={`transition-all duration-700 h-full ${
+                  visibleCards[index] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+                }`}
               >
-                {/* карточка */}
                 <Card
-                  className={`relative overflow-hidden rounded-2xl p-0 bg-gradient-to-b from-background/60 to-transparent group hover:scale-[1.02] transition-transform duration-300 h-full min-h-[34rem] ${isFeatured ? "border-primary border" : "border-primary/10"}`}
+                  className={`relative overflow-hidden rounded-2xl p-0 bg-gradient-to-b from-background/60 to-transparent group hover:scale-[1.02] transition-transform duration-300 h-full min-h-[34rem] ${
+                    isFeatured ? "border-primary border" : "border-primary/10"
+                  }`}
                 >
-                  {/* метка "Популярный выбор" */}
                   {isFeatured && (
                     <div className="absolute top-4 left-1/2 -translate-x-1/2 z-30">
                       <div className="bg-gradient-to-r from-primary to-secondary text-primary-foreground text-sm font-semibold px-4 py-1 rounded-full shadow-lg">
@@ -171,62 +169,65 @@ export function Products() {
                         loading="lazy"
                       />
 
-                      {/* BADGES (правый верхний угол) */}
+                      {/* значки объёма/веса/шаров */}
                       <div className="absolute top-3 right-3 flex flex-col items-end gap-2 z-10">
-                        {product.volume ? (
+                        {product.volume && (
                           <div className="inline-flex justify-center items-center h-8 min-w-[2rem] px-2 rounded-full bg-transparent ring-1 ring-white/10 text-white text-xs font-medium shadow-sm">
-                            <span className="leading-none">{product.volume}</span>
+                            <span>{product.volume}</span>
                           </div>
-                        ) : null}
-                        {product.weight ? (
+                        )}
+                        {product.weight && (
                           <div className="inline-flex justify-center items-center h-8 min-w-[2rem] px-2 rounded-full bg-transparent ring-1 ring-white/10 text-white text-xs font-medium shadow-sm">
-                            <span className="leading-none">{product.weight}</span>
+                            <span>{product.weight}</span>
                           </div>
-                        ) : null}
-                        {product.pieces ? (
+                        )}
+                        {product.pieces && (
                           <div className="inline-flex justify-center items-center h-8 min-w-[2rem] px-2 rounded-full bg-transparent ring-1 ring-white/10 text-white text-xs font-medium shadow-sm">
-                            <span className="leading-none">{product.pieces}</span>
+                            <span>{product.pieces}</span>
                           </div>
-                        ) : null}
+                        )}
                       </div>
                     </div>
 
-                    {/* название центрировано */}
+                    {/* название */}
                     <div className="mb-3">
                       <h3 className="text-lg md:text-xl font-bold w-full leading-tight text-center">
                         {product.name}
                       </h3>
                     </div>
 
-                    {/* описание по необходимости */}
-                    {product.description ? (
-                      <p className="text-muted-foreground mb-4 text-sm leading-relaxed">{product.description}</p>
-                    ) : null}
-
-                    {/* NEW: Блок двух цен (Продажа | Обмен) — выровнены: подписи слева, суммы справа */}
+                    {/* блок цен */}
                     {(product.sellPrice !== undefined || product.exchangePrice !== undefined) && (
                       <div className="mb-4">
                         <div className="flex items-center justify-between mb-2">
                           <div className="text-sm text-muted-foreground">Продажа</div>
                           <div className="text-sm font-semibold text-right">
-                            {product.sellPrice !== undefined ? product.sellPrice.toLocaleString("ru-RU") + " ₽" : "-"}
+                            {product.sellPrice?.toLocaleString("ru-RU")} ₽
                           </div>
                         </div>
-                        <div className="flex items-center justify-between">
+                        <div className="flex items-center justify-between mb-2">
                           <div className="text-sm text-muted-foreground">Обмен</div>
                           <div className="text-sm font-semibold text-right">
-                            {product.exchangePrice !== undefined ? product.exchangePrice.toLocaleString("ru-RU") + " ₽" : "-"}
+                            {product.exchangePrice?.toLocaleString("ru-RU")} ₽
                           </div>
+                        </div>
+
+                        {/* надпись о скидке */}
+                        <div className="text-center text-[13px] font-medium text-cyan-400 mt-3">
+                          При оплате наличными — скидка 200 ₽
                         </div>
                       </div>
                     )}
-                    {/* END NEW */}
 
-                    {/* Кнопки: Купить + Подробнее */}
+                    {/* кнопки */}
                     <div className="mt-auto">
                       <div className="mb-3">
                         <Button
-                          className={`w-full ${isFeatured ? "bg-gradient-to-r from-primary to-secondary hover:opacity-95 text-primary-foreground" : "bg-primary/20 hover:bg-primary/30 text-primary border border-primary/30"}`}
+                          className={`w-full ${
+                            isFeatured
+                              ? "bg-gradient-to-r from-primary to-secondary hover:opacity-95 text-primary-foreground"
+                              : "bg-primary/20 hover:bg-primary/30 text-primary border border-primary/30"
+                          }`}
                           asChild
                         >
                           <a href={`tel:+74958683399`} rel="noopener noreferrer">
@@ -236,12 +237,14 @@ export function Products() {
                       </div>
 
                       <div className="text-center">
-                        <Link href={`/products/${product.slug}`} className="text-sm text-muted-foreground hover:text-primary">
+                        <Link
+                          href={`/products/${product.slug}`}
+                          className="text-sm text-muted-foreground hover:text-primary"
+                        >
                           Подробнее
                         </Link>
                       </div>
                     </div>
-                    {/* END Кнопки */}
                   </div>
                 </Card>
               </div>

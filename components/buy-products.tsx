@@ -1,141 +1,170 @@
 "use client"
 
-import React from "react"
-import Image from "next/image"
-import Link from "next/link"
-import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
+import { Card } from "@/components/ui/card"
+import { useEffect, useRef, useState } from "react"
+import Image from "next/image"
 
-/* NEW: Секция "Выкуп" — стиль соответствует components/products.tsx */
 type BuyProduct = {
-  slug: string
-  title: string
+  id: string
+  name: string
+  priceLabel: string
   image: string
-  price: string
   volume?: string
   weight?: string
+  pieces?: string
 }
 
 export function BuyProducts() {
-  const products: BuyProduct[] = [
+  const [visibleCards, setVisibleCards] = useState<boolean[]>([])
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([])
+
+  const buyProducts: BuyProduct[] = [
     {
-      slug: "buy-10",
-      title: "Баллон 10 литров",
+      id: "refill10",
+      name: "Баллон 10 литров",
+      priceLabel: "3 000 ₽",
       image: "/products/refill.png",
-      price: "3 000 ₽",
       volume: "10 л",
       weight: "6,2 кг",
     },
     {
-      slug: "buy-5",
-      title: "Баллон 5 литров",
+      id: "party5",
+      name: "Баллон 5 литров",
+      priceLabel: "1 000 ₽",
       image: "/products/party.png",
-      price: "1 000 ₽",
       volume: "5 л",
       weight: "2,8 кг",
     },
     {
-      slug: "buy-2",
-      title: "Баллон 2 литра",
+      id: "classic2",
+      name: "Баллон 2 литра",
+      priceLabel: "800 ₽",
       image: "/products/classic.png",
-      price: "800 ₽",
       volume: "2 л",
       weight: "1,2 кг",
     },
     {
-      slug: "buy-35",
-      title: "Баллон 3,5 литра",
+      id: "premium35",
+      name: "Баллон 3,5 литра",
+      priceLabel: "200 ₽",
       image: "/products/premium.png",
-      price: "200 ₽",
       volume: "3,5 л",
       weight: "650 г",
     },
   ]
 
+  useEffect(() => {
+    const observers = cardRefs.current.map((el, idx) => {
+      if (!el) return null
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              setVisibleCards((prev) => {
+                const next = [...prev]
+                next[idx] = true
+                return next
+              })
+              io.unobserve(e.target)
+            }
+          })
+        },
+        { threshold: 0.1 },
+      )
+      io.observe(el)
+      return io
+    })
+
+    return () => observers.forEach((o) => o?.disconnect())
+  }, [])
+
   return (
-    <section id="buy" className="py-24 relative">
+    <section id="buy" className="py-24 md:py-32 relative">
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
             Выкупим пустые баллоны
           </h2>
           <p className="text-lg text-muted-foreground text-pretty leading-relaxed">
-            Продаёте пустые баллоны? Принимем по фиксированной цене — выберите вашу модель и оформите продажу.
+            Продаёте пустые баллоны? Принимаем по фиксированной цене — выберите вашу модель и оформите продажу.
           </p>
         </div>
 
-        {/* Сетка и карточки в том же стиле, что и products */}
+        {/* карточки */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-full mx-auto">
-          {products.map((p) => (
-            <Card
-              key={p.slug}
-              className="relative overflow-hidden rounded-2xl p-0 bg-gradient-to-b from-background/60 to-transparent group hover:scale-[1.02] transition-transform duration-300 h-full min-h-[34rem]"
+          {buyProducts.map((item, index) => (
+            <div
+              key={item.id}
+              ref={(el) => {
+                cardRefs.current[index] = el
+              }}
+              className={`transition-all duration-700 h-full ${
+                visibleCards[index] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+              }`}
             >
-              <div className="p-6 flex flex-col h-full">
-                {/* Верх — изображение (увеличенная область, чтобы картинка была выразительнее) */}
-                <div className="relative h-72 mb-4 overflow-hidden rounded-xl bg-transparent flex items-center justify-center mt-6">
-                  <Image
-                    src={p.image}
-                    alt={p.title}
-                    fill
-                    className="object-contain transition-transform duration-500 group-hover:scale-110"
-                    sizes="(max-width:768px) 80vw, 25vw"
-                    priority={false}
-                  />
+              <Card className="relative overflow-hidden rounded-2xl p-0 bg-gradient-to-b from-background/60 to-transparent group hover:scale-[1.02] transition-transform duration-300 h-full min-h-[28rem] border-primary/10">
+                <div className="p-5 flex flex-col h-full">
+                  
+                  {/* изображение — размер как в products */}
+                  <div className="relative h-72 mb-4 overflow-hidden rounded-xl bg-transparent flex items-center justify-center">
+                    <Image
+                      src={item.image || "/placeholder.svg"}
+                      alt={item.name}
+                      fill
+                      className="object-contain transition-transform duration-500 group-hover:scale-105"
+                      sizes="(max-width:768px) 80vw, 25vw"
+                      quality={92}
+                      loading="lazy"
+                    />
 
-                  {/* BADGES: компактные бейджи справа сверху */}
-                  <div className="absolute top-3 right-3 flex flex-col items-end gap-2 z-10">
-                    {p.volume && (
-                      <div className="inline-flex justify-center items-center h-8 min-w-[2rem] px-2 rounded-full bg-transparent ring-1 ring-white/10 text-white text-xs font-medium shadow-sm">
-                        <span className="leading-none">{p.volume}</span>
-                      </div>
-                    )}
-                    {p.weight && (
-                      <div className="inline-flex justify-center items-center h-8 min-w-[2rem] px-2 rounded-full bg-transparent ring-1 ring-white/10 text-white text-xs font-medium shadow-sm">
-                        <span className="leading-none">{p.weight}</span>
-                      </div>
-                    )}
+                    {/* объём и вес */}
+                    <div className="absolute top-3 right-3 flex flex-col items-end gap-2 z-10">
+                      {item.volume && (
+                        <div className="inline-flex justify-center items-center h-8 min-w-[2rem] px-2 rounded-full bg-transparent ring-1 ring-white/10 text-white text-xs font-medium shadow-sm">
+                          <span>{item.volume}</span>
+                        </div>
+                      )}
+                      {item.weight && (
+                        <div className="inline-flex justify-center items-center h-8 min-w-[2rem] px-2 rounded-full bg-transparent ring-1 ring-white/10 text-white text-xs font-medium shadow-sm">
+                          <span>{item.weight}</span>
+                        </div>
+                      )}
+                    </div>
                   </div>
-                </div>
 
-                {/* Название — центрировано и во всю ширину */}
-                <div className="mb-3">
-                  <h3 className="text-lg md:text-xl font-bold w-full leading-tight text-center">
-                    {p.title}
-                  </h3>
-                </div>
+                  {/* название */}
+                  <div className="mb-2">
+                    <h3 className="text-lg md:text-xl font-bold w-full leading-tight text-center">
+                      {item.name}
+                    </h3>
+                  </div>
 
-                {/* Цена — перенесена вниз, перед кнопками (центрально) */}
-                <div className="mb-4 text-center">
-                  <div className="text-primary font-semibold text-lg">{p.price}</div>
-                </div>
+                  {/* стоимость */}
+                  <div className="mb-1">
+                    <div className="flex items-center justify-between">
+                      <div className="text-sm text-muted-foreground">Стоимость</div>
+                      <div className="text-sm font-semibold text-primary">{item.priceLabel}</div>
+                    </div>
+                  </div>
 
-                {/* Кнопки — большая основная кнопка "Продать", под ней ссылка "Подробнее" */}
-                <div className="mt-auto">
-                  <div className="mb-3">
+                  {/* кнопка — ближе к низу */}
+                  <div className="mt-1 mb-1">
                     <Button
-                      className="w-full bg-emerald-500 hover:brightness-95 text-white"
+                      className="w-full bg-primary/20 hover:bg-primary/30 text-primary border border-primary/30"
                       asChild
                     >
-                      <a
-                        href={'tel:+74958683399'}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
+                      <a href="tel:+74958683399" rel="noopener noreferrer">
                         Продать
                       </a>
                     </Button>
                   </div>
-
-                  <div className="text-center">
-                  </div>
                 </div>
-              </div>
-            </Card>
+              </Card>
+            </div>
           ))}
         </div>
       </div>
     </section>
   )
 }
-/* END NEW */
