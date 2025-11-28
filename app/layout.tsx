@@ -4,6 +4,7 @@ import { Exo_2, Manrope } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 import AnimatedBackground from "@/components/AnimatedBackground";
+import Script from "next/script"
 
 const exo2 = Exo_2({
   subsets: ["latin", "cyrillic"],
@@ -40,25 +41,58 @@ export const metadata: Metadata = {
   themeColor: '#032a3f'
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ru">
+      <head>
+        {/* Яндекс Вебмастер */}
+        <meta name="yandex-verification" content="f46aeab7aa40e5e1" />
+
+        {/* Яндекс.Метрика */}
+        <Script id="yandex-metrika" strategy="afterInteractive">
+          {`
+            (function(m,e,t,r,i,k,a){
+              m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+              m[i].l=1*new Date();
+              for (var j = 0; j < document.scripts.length; j++) {
+                if (document.scripts[j].src === r) { return; }
+              }
+              k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+            })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js?id=105534020', 'ym');
+
+            ym(105534020, 'init', {
+              ssr: true,
+              webvisor: true,
+              clickmap: true,
+              ecommerce: "dataLayer",
+              accurateTrackBounce: true,
+              trackLinks: true
+            });
+          `}
+        </Script>
+
+        <noscript>
+          <div>
+            <img
+              src="https://mc.yandex.ru/watch/105534020"
+              style={{ position: "absolute", left: "-9999px" }}
+              alt=""
+            />
+          </div>
+        </noscript>
+      </head>
+
       <body className={`${manrope.variable} ${exo2.variable} font-sans antialiased`}>
-        {/*фон */}
+        {/* Фон */}
         <AnimatedBackground />
 
-        {/*контент */}
+        {/* Контент */}
         {children}
 
-        {/* аналитика */}
+        {/* Аналитика */}
         <Analytics />
       </body>
     </html>
-  );
+  )
 }
-
-
