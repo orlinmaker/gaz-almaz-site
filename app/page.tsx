@@ -11,20 +11,19 @@ import { Contact } from "@/components/contact"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 
-// Акции и каталог грузим лениво на клиенте, чтобы не мешать LCP Hero
+// Акции и каталог грузим лениво
 const Deals = dynamic(() => import("@/components/deals").then((m) => m.Deals), {
-  ssr: false,
   loading: () => (
     <section id="deals" className="py-24" />
   ),
 })
 
 const Products = dynamic(() => import("@/components/products").then((m) => m.Products), {
-  ssr: false,
   loading: () => (
     <section id="products" className="py-24" />
   ),
 })
+
 
 
 export default function Home() {
